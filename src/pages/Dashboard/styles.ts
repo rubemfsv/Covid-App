@@ -43,9 +43,16 @@ export const ProvinceList = styled(FlatList as new () => FlatList)`
   padding: 32px 24px 16px;
 `;
 
-export const CountryName = styled.Text`
+export const ListTitle = styled.Text`
   font-size: 32px;
   margin-bottom: 20px;
+  color: #3e3b47;
+  font-family: 'RobotoSlab-Medium';
+`;
+
+export const CountryName = styled.Text`
+  font-size: 30px;
+  margin-bottom: 15px;
   color: #3e3b47;
   font-family: 'RobotoSlab-Medium';
 `;
@@ -54,7 +61,7 @@ export const ProvinceContainer = styled.View`
   background: #ab8c68;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 `;
 
 export const StatusName = styled.Text`
@@ -65,5 +72,5 @@ export const StatusName = styled.Text`
 export const StatusNumber = styled.Text`
   font-size: 22px;
   font-family: 'RobotoSlab-Regular';
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 `;

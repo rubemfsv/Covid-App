@@ -7,6 +7,7 @@ import {
   Header,
   HeaderTitle,
   UserName,
+  ListTitle,
   AppInfoContainer,
   AppName,
   LogoffButton,
@@ -17,6 +18,7 @@ import {
   StatusNumber,
 } from './styles';
 import api from '../../services/api';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Dashboard: React.FC = () => {
   const user = auth().currentUser?.displayName;
@@ -53,6 +55,8 @@ const Dashboard: React.FC = () => {
       });
   }, [provinces]);
 
+  console.log(provinces);
+
   return (
     <Container>
       <Header>
@@ -72,10 +76,11 @@ const Dashboard: React.FC = () => {
 
       <ProvinceList
         data={provinces}
-        keyExtractor={province => province.critical}
-        ListHeaderComponent={<CountryName>Brazil</CountryName>}
+        keyExtractor={(province) => auth().currentUser?.uid}
+        ListHeaderComponent={<ListTitle>Covid Situation</ListTitle>}
         renderItem={({ item: province }) => (
-          <ProvinceContainer key={province.confirmed}>
+          <ProvinceContainer>
+            <CountryName>{province.country}</CountryName>
             <StatusName>Confirmed:</StatusName>
             <StatusNumber>{province.confirmed}</StatusNumber>
 
