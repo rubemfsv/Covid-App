@@ -15,6 +15,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
 import * as Yup from 'yup';
 import auth from '@react-native-firebase/auth';
+
 import RNPickerSelect from 'react-native-picker-select';
 
 import api from '../../services/api';
@@ -40,13 +41,17 @@ interface SignUpFormData {
   country: string;
 }
 
+interface Province {
+  name: string;
+}
+
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
-  const [provinces, setProvinces] = useState([]);
+  const [provinces, setProvinces] = useState<Province[]>([]);
   const [provinceInput, setProvinceInput] = useState(null);
 
   useEffect(() => {
@@ -98,19 +103,18 @@ const SignUp: React.FC = () => {
           .then(authenticate => {
             return authenticate.user.updateProfile({
               displayName: data.name,
+              photoURL: provinceInput,
             });
           })
-          .catch(function (error) {
+          .catch(error => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage);
           });
 
-        console.log(data);
-        Alert.alert('Cadastro realizado!');
+        Alert.alert('Successful Registration!');
       } catch (err) {
-        console.log(formRef);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
 
@@ -118,12 +122,12 @@ const SignUp: React.FC = () => {
         }
 
         Alert.alert(
-          'Erro no cadastro',
+          'Registration failed',
           'Ocorreu um erro ao fazer cadastro, tente novamente.',
         );
       }
     },
-    [navigation],
+    [provinceInput],
   );
 
   return (
@@ -174,8 +178,17 @@ const SignUp: React.FC = () => {
                   onValueChange={value => setProvinceInput(value)}
                   placeholder={{
                     label: 'Select a country...',
-                    color: '#fff',
                     value: null,
+                  }}
+                  Icon={() => {
+                    return (
+                      <Icon
+                        name="arrow-down"
+                        size={24}
+                        color="white"
+                        style={{ marginTop: 12, marginRight: 10 }}
+                      />
+                    );
                   }}
                   style={{ ...pickerSelectStyles }}
                   items={provinceOption}

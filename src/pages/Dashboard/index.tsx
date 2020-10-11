@@ -18,17 +18,14 @@ import {
   StatusNumber,
 } from './styles';
 import api from '../../services/api';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const Dashboard: React.FC = () => {
   const user = auth().currentUser?.displayName;
   const [provinces, setProvinces] = useState([]);
-  const name = 'brazil';
+  const name = auth().currentUser?.photoURL;
 
   const logOff = useCallback(() => {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
+    auth().signOut();
   }, []);
 
   useEffect(() => {
@@ -53,9 +50,7 @@ const Dashboard: React.FC = () => {
           console.log("Ops, I think it's connecting with the API");
         }
       });
-  }, [provinces]);
-
-  console.log(provinces);
+  }, [name]);
 
   return (
     <Container>
@@ -76,7 +71,7 @@ const Dashboard: React.FC = () => {
 
       <ProvinceList
         data={provinces}
-        keyExtractor={(province) => auth().currentUser?.uid}
+        keyExtractor={() => auth().currentUser.uid.toString()}
         ListHeaderComponent={<ListTitle>Covid Situation</ListTitle>}
         renderItem={({ item: province }) => (
           <ProvinceContainer>

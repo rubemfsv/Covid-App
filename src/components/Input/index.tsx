@@ -80,7 +80,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
       />
       <TextInput
         ref={inputElementRef}
-        placeholderTextColor="#fff"
+        placeholderTextColor="#A1A1A1"
         keyboardAppearance="dark"
         defaultValue={defaultValue}
         onFocus={handleInputFocus}

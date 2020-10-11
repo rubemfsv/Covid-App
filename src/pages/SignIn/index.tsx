@@ -39,34 +39,33 @@ const SignIn: React.FC = () => {
   const navigation = useNavigation();
 
   const handleSignIn = useCallback(async (data: SignInFormData) => {
-    formRef.current?.setErrors({});
+    try {
+      formRef.current?.setErrors({});
 
-    const schema = Yup.object().shape({
-      email: Yup.string()
-        .required('E-mail required.')
-        .email('Insert a valid e-mail.'),
-      password: Yup.string().required('Password required.'),
-    });
-
-    await schema.validate(data, {
-      abortEarly: false,
-    });
-
-    await auth()
-      .signInWithEmailAndPassword(data.email, data.password)
-      .then(() => console.log('User signed in!'))
-      .catch(err => {
-        if (err instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(err);
-
-          formRef.current?.setErrors(errors);
-        }
-
-        Alert.alert(
-          'Authentication Error',
-          'There was an error signing in, check credentials.',
-        );
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail obrigatório.')
+          .email('Digite um e-mail válido.'),
+        password: Yup.string().required('Senha obrigatória.'),
       });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      await auth().signInWithEmailAndPassword(data.email, data.password);
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+
+        formRef.current?.setErrors(errors);
+      }
+
+      Alert.alert(
+        'Erro na autenticalçao',
+        'Ocorreu um erro ao fazer login, cheque as credenciais.',
+      );
+    }
   }, []);
 
   return (
