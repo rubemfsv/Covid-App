@@ -39,6 +39,7 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
+  const countryInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
   const handleSignUp = useCallback(
@@ -58,8 +59,8 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
-
+        // await api.post('/users', data);
+        console.log(data);
         Alert.alert(
           'Cadastro realizado!',
           'Você já pode fazer seu logon no GoBarber!',
@@ -67,6 +68,7 @@ const SignUp: React.FC = () => {
 
         navigation.goBack();
       } catch (err) {
+        console.log(formRef);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
 
@@ -121,16 +123,15 @@ const SignUp: React.FC = () => {
                 placeholder="E-mail"
                 returnKeyType="next"
                 onSubmitEditing={() => {
-                  passwordInputRef.current?.focus();
+                  countryInputRef.current?.focus();
                 }}
               />
 
               <Input
-                ref={emailInputRef}
+                ref={countryInputRef}
                 autoCorrect={false}
                 autoCapitalize="none"
-                keyboardType="email-address"
-                name="email"
+                name="country"
                 icon="mail"
                 placeholder="Country"
                 returnKeyType="next"

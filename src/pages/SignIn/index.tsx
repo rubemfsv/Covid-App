@@ -43,9 +43,9 @@ const SignIn: React.FC = () => {
 
     const schema = Yup.object().shape({
       email: Yup.string()
-        .required('E-mail obrigatório.')
-        .email('Digite um e-mail válido.'),
-      password: Yup.string().required('Senha obrigatória.'),
+        .required('E-mail required.')
+        .email('Insert a valid e-mail.'),
+      password: Yup.string().required('Password required.'),
     });
 
     await schema.validate(data, {
@@ -54,9 +54,7 @@ const SignIn: React.FC = () => {
 
     await auth()
       .signInWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        Alert.alert('Login ok');
-      })
+      .then(() => console.log('User signed in!'))
       .catch(err => {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);

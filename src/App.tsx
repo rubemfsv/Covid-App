@@ -11,10 +11,10 @@ const src: React.FC = () => {
     <NavigationContainer>
       <StatusBar
         barStyle="light-content"
-        backgroundColor="#DED4C8"
+        backgroundColor="#5e4d39"
         translucent
       />
-      <View style={{ flex: 1, backgroundColor: '#DED4C8' }}>
+      <View style={{ flex: 1, backgroundColor: '#ded4c8' }}>
         <Routes />
       </View>
     </NavigationContainer>
