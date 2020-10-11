@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
-import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
+import { Form } from '@unform/mobile';
 import * as Yup from 'yup';
+import auth, { firebase } from '@react-native-firebase/auth';
 
 import api from '../../services/api';
 
@@ -33,6 +34,7 @@ interface SignUpFormData {
   name: string;
   email: string;
   password: string;
+  country: string;
 }
 
 const SignUp: React.FC = () => {
@@ -59,14 +61,22 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        // await api.post('/users', data);
-        console.log(data);
-        Alert.alert(
-          'Cadastro realizado!',
-          'Você já pode fazer seu logon no GoBarber!',
-        );
+        auth()
+          .createUserWithEmailAndPassword(data.email, data.password)
+          .then(authenticate => {
+            return authenticate.user.updateProfile({
+              displayName: data.name,
+            });
+          })
+          .catch(function (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+          });
 
-        navigation.goBack();
+        console.log(data);
+        Alert.alert('Cadastro realizado!');
       } catch (err) {
         console.log(formRef);
         if (err instanceof Yup.ValidationError) {

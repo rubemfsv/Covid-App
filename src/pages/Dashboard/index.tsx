@@ -19,7 +19,7 @@ import {
 import api from '../../services/api';
 
 const Dashboard: React.FC = () => {
-  const user = auth().currentUser?.email;
+  const user = auth().currentUser?.displayName;
   const [provinces, setProvinces] = useState([]);
   const name = 'brazil';
 
@@ -72,10 +72,10 @@ const Dashboard: React.FC = () => {
 
       <ProvinceList
         data={provinces}
-        keyExtractor={province => province.id}
+        keyExtractor={province => province.critical}
         ListHeaderComponent={<CountryName>Brazil</CountryName>}
         renderItem={({ item: province }) => (
-          <ProvinceContainer>
+          <ProvinceContainer key={province.confirmed}>
             <StatusName>Confirmed:</StatusName>
             <StatusNumber>{province.confirmed}</StatusNumber>
 
