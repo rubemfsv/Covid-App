@@ -16,6 +16,15 @@ export const AppName = styled.Text`
   margin-top: 94px;
 `;
 
+export const Picker = styled.View`
+  background: #e3ba88;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border-width: 1px;
+  border-color: #fff;
+`;
+
 export const Title = styled.Text`
   font-size: 24px;
   color: #312e38;
