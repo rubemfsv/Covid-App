@@ -9,6 +9,7 @@ import {
   UserName,
   ListTitle,
   AppInfoContainer,
+  ApiError,
   AppName,
   LogoffButton,
   ProvinceList,
@@ -69,27 +70,35 @@ const Dashboard: React.FC = () => {
         </AppInfoContainer>
       </Header>
 
-      <ProvinceList
-        data={provinces}
-        keyExtractor={() => auth().currentUser.uid.toString()}
-        ListHeaderComponent={<ListTitle>Covid Situation</ListTitle>}
-        renderItem={({ item: province }) => (
-          <ProvinceContainer>
-            <CountryName>{province.country}</CountryName>
-            <StatusName>Confirmed:</StatusName>
-            <StatusNumber>{province.confirmed}</StatusNumber>
+      {auth().currentUser !== null ? (
+        <ProvinceList
+          data={provinces}
+          keyExtractor={() => auth().currentUser.uid.toString()}
+          ListHeaderComponent={<ListTitle>Covid Situation</ListTitle>}
+          renderItem={({ item: province }) => (
+            <ProvinceContainer>
+              <CountryName>{province.country}</CountryName>
+              <StatusName>Confirmed:</StatusName>
+              <StatusNumber>{province.confirmed}</StatusNumber>
 
-            <StatusName>Critical:</StatusName>
-            <StatusNumber>{province.critical}</StatusNumber>
+              <StatusName>Critical:</StatusName>
+              <StatusNumber>{province.critical}</StatusNumber>
 
-            <StatusName>Recovered:</StatusName>
-            <StatusNumber>{province.recovered}</StatusNumber>
+              <StatusName>Recovered:</StatusName>
+              <StatusNumber>{province.recovered}</StatusNumber>
 
-            <StatusName>Deaths:</StatusName>
-            <StatusNumber>{province.deaths}</StatusNumber>
-          </ProvinceContainer>
-        )}
-      />
+              <StatusName>Deaths:</StatusName>
+              <StatusNumber>{province.deaths}</StatusNumber>
+            </ProvinceContainer>
+          )}
+        />
+      ) : (
+        <Container>
+          <ApiError>
+            There is an error connecting with the API. Try again later
+          </ApiError>
+        </Container>
+      )}
     </Container>
   );
 };

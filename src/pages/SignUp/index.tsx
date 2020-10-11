@@ -87,11 +87,11 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório.'),
+          name: Yup.string().required('Name is required.'),
           email: Yup.string()
-            .required('E-mail obrigatório.')
-            .email('Digite um e-mail válido.'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+            .required('E-mail is required.')
+            .email('Type a valid e-mail.'),
+          password: Yup.string().min(6, 'Password is required'),
         });
 
         await schema.validate(data, {
@@ -121,10 +121,7 @@ const SignUp: React.FC = () => {
           formRef.current?.setErrors(errors);
         }
 
-        Alert.alert(
-          'Registration failed',
-          'Ocorreu um erro ao fazer cadastro, tente novamente.',
-        );
+        Alert.alert('Registration failed', 'Something went wrong, try again.');
       }
     },
     [provinceInput],
@@ -177,7 +174,7 @@ const SignUp: React.FC = () => {
                 <RNPickerSelect
                   onValueChange={value => setProvinceInput(value)}
                   placeholder={{
-                    label: 'Select a country...',
+                    label: 'Select your country...',
                     value: null,
                   }}
                   Icon={() => {
@@ -185,7 +182,7 @@ const SignUp: React.FC = () => {
                       <Icon
                         name="arrow-down"
                         size={24}
-                        color="white"
+                        color="#d0d4da"
                         style={{ marginTop: 12, marginRight: 10 }}
                       />
                     );

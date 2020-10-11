@@ -74,3 +74,10 @@ export const StatusNumber = styled.Text`
   font-family: 'RobotoSlab-Regular';
   margin-bottom: 25px;
 `;
+
+export const ApiError = styled.Text`
+  font-size: 30px;
+  font-family: 'RobotoSlab-Medium';
+  padding: 20px 20px;
+  color: #ff0617;
+`;

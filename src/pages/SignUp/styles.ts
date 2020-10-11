@@ -17,7 +17,7 @@ export const AppName = styled.Text`
 `;
 
 export const Picker = styled.View`
-  background: #e3ba88;
+  background: #81ac81;
   margin-bottom: 8px;
   border-radius: 10px;
   margin-bottom: 8px;
