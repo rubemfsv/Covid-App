@@ -1,4 +1,5 @@
 # Covid App
+API link: https://rapidapi.com/Gramzivi/api/covid-19-data
 
 ## How to run:
 1. Download the project using git clone https://github.com/rubemfsv/Covid-App.git
