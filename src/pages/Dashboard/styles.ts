@@ -65,13 +65,14 @@ export const ProvinceContainer = styled.View`
 `;
 
 export const StatusName = styled.Text`
-  font-size: 24px;
-  font-family: 'RobotoSlab-Medium';
+  font-size: 20px;
+  font-family: 'RobotoSlab-Regular';
+  color: #262626
 `;
 
 export const StatusNumber = styled.Text`
-  font-size: 22px;
-  font-family: 'RobotoSlab-Regular';
+font-size: 26px;
+font-family: 'RobotoSlab-Medium';
   margin-bottom: 25px;
 `;
 
